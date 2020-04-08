@@ -58,7 +58,7 @@ plt.plot(
     x, exponential_func(x, *popt),
     label=r'${a}e^{b}$ and $R^2$={r_squared}'.format(
         a=round(popt[0], 2),
-        b='{' + str(round(popt[1], 2)) + '}x',
+        b='{' + str(round(popt[1], 2)) + 'x}',
         r_squared=round(r_squared, 4),
     ),
     linestyle='--',

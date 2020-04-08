@@ -29,8 +29,8 @@ labels = [
 assert(len(y) == len(x) == len(labels))
 
 
-def exponential_func(x, a, b):
-    return a * np.exp(b * x)
+def exponential_func(x, a, b, c):
+    return a * np.exp(b * x) + c
 
 
 popt, pcov = curve_fit(exponential_func, x, y)
@@ -38,7 +38,7 @@ popt, pcov = curve_fit(exponential_func, x, y)
 
 # work out R^2
 def fit_function(x):
-    return popt[0] * np.exp(popt[1] * x)
+    return popt[0] * np.exp(popt[1] * x) + popt[2]
 
 
 residuals = y - fit_function(x)
@@ -56,10 +56,10 @@ plt.plot(
 )
 plt.plot(
     x, exponential_func(x, *popt),
-    label=r'${a}e^{b}$ and $R^2$={r_squared}'.format(
+    label=r'$y={a}e^{b}{c}$'.format(
         a=round(popt[0], 2),
         b='{' + str(round(popt[1], 2)) + 'x}',
-        r_squared=round(r_squared, 4),
+        c=round(popt[2], 2),
     ),
     linestyle='--',
     color='grey',
@@ -71,6 +71,11 @@ plt.plot(
 for a, b in zip(x, y):
     plt.text(a, b, str(b), fontsize=10, color='black')
 
+# Add blank plot to show r_squared in legend
+plt.plot(
+    [], [], ' ',
+    label="$R^2={r_squared}$".format(r_squared=round(r_squared, 4))
+)
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x, labels, rotation='vertical')
 plt.legend(loc='upper left')

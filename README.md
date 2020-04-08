@@ -9,6 +9,6 @@ pip install -r requirements.txt
 python plot.py
 ```
 
-## Latest plot (7th April)
+## Latest plot (8th April)
 
 ![Image description](https://github.com/zsoobhan/covid/blob/master/latest.png)

@@ -49,14 +49,18 @@ r_squared = 1 - (ss_res / ss_tot)
 
 # Plot
 plt.title(f'Covid-19 UK Deaths', fontsize=16)
-plt.plot(x, y, 'ro', label="Deaths", marker='o', markersize='4')
+plt.plot(x, y, '-o', label="Deaths", marker='o', markersize='2', color="red")
 plt.plot(
     x, exponential_func(x, *popt),
     label=r'${a}e^{b}$ and $R^2$={r_squared}'.format(
         a=round(popt[0], 2),
         b='{' + str(round(popt[1], 2)) + '}x',
-        r_squared=round(r_squared, 4)
-    )
+        r_squared=round(r_squared, 4),
+    ),
+    linestyle='--',
+    color='grey',
+    linewidth=1
+
 )
 
 # Annotate each point with its value

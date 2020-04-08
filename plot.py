@@ -49,7 +49,11 @@ r_squared = 1 - (ss_res / ss_tot)
 
 # Plot
 plt.title(f'Covid-19 UK Deaths', fontsize=16)
-plt.plot(x, y, '-o', label="Deaths", marker='o', markersize='2', color="red")
+plt.plot(
+    x, y,
+    linestyle='-', label="Deaths", marker='o', markersize='2', color="red",
+    dash_joinstyle='bevel'
+)
 plt.plot(
     x, exponential_func(x, *popt),
     label=r'${a}e^{b}$ and $R^2$={r_squared}'.format(

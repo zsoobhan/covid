@@ -8,3 +8,7 @@ This is a quick and dirty script plotting the deathtoll and fitting an exponenti
 pip install -r requirements.txt
 python plot.py
 ```
+
+## Latest plot (7th April)
+
+![Image description](https://github.com/zsoobhan/covid/blob/master/latest.png)

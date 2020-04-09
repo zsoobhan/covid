@@ -25,6 +25,14 @@ labels = [
     '5 Apr.', '6 Apr.', '7 Apr.', '8 Apr.'
 ]
 
+x_diffs = x[1:]
+diffs = []
+for idx, val in enumerate(y):
+    if idx+1 < len(y):
+        diffs += [y[idx+1]-val]
+
+diffs = np.array(diffs)
+
 # ensure we have the correct number of points
 assert(len(y) == len(x) == len(labels))
 
@@ -34,6 +42,7 @@ def exponential_func(x, a, b, c):
 
 
 popt, pcov = curve_fit(exponential_func, x, y)
+popt_diffs, pcov_diffs = curve_fit(exponential_func, x_diffs, diffs)
 
 
 # work out R^2
@@ -47,13 +56,24 @@ ss_tot = np.sum((y - np.mean(y))**2)
 r_squared = 1 - (ss_res / ss_tot)
 
 
+# work out R^2 for diffs
+def fit_function_diffs(x):
+    return popt_diffs[0] * np.exp(popt_diffs[1] * x) + popt_diffs[2]
+
+
+residuals_diffs = diffs - fit_function_diffs(x_diffs)
+ss_res_diffs = np.sum(residuals_diffs**2)
+ss_tot_diffs = np.sum((diffs - np.mean(diffs))**2)
+r_squared_diffs = 1 - (ss_res_diffs / ss_tot_diffs)
+
 # Plot
-plt.title(f'Covid-19 UK Deaths', fontsize=16)
+plt.title(f'Covid-19 UK Hospitalised Fatalities', fontsize=16)
 plt.plot(
     x, y,
-    linestyle='-', label="Deaths", marker='o', markersize='2', color="red",
-    dash_joinstyle='bevel'
+    linestyle='-', label="Reported Deaths", marker='o',
+    markersize='2', color="red", dash_joinstyle='bevel'
 )
+
 plt.plot(
     x, exponential_func(x, *popt),
     label=r'$y={a}e^{b}{c}$'.format(
@@ -66,16 +86,38 @@ plt.plot(
     linewidth=1
 
 )
+plt.plot(
+    [], [], ' ',
+    label="$R^2={r_squared}$".format(r_squared=round(r_squared, 4))
+)
+plt.plot(
+    x_diffs, diffs, '-o', markersize='2',
+    color='orange', label='Deaths per day'
+)
+plt.plot(
+    x, exponential_func(x, *popt_diffs),
+    label=r'$y={a}e^{b}{c}$'.format(
+        a=round(popt_diffs[0], 2),
+        b='{' + str(round(popt_diffs[1], 2)) + 'x}',
+        c=round(popt_diffs[2], 2),
+    ),
+    linestyle='--',
+    color='blue',
+    linewidth=1
+
+)
+plt.plot(
+    [], [], ' ',
+    label="$R^2={r_squared}$".format(r_squared=round(r_squared_diffs, 4))
+)
 
 # Annotate each point with its value
 for a, b in zip(x, y):
     plt.text(a, b, str(b), fontsize=10, color='black')
 
-# Add blank plot to show r_squared in legend
-plt.plot(
-    [], [], ' ',
-    label="$R^2={r_squared}$".format(r_squared=round(r_squared, 4))
-)
+for a, b in zip(x_diffs, diffs):
+    plt.text(a, b, str(b), fontsize=10, color='black')
+
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x, labels, rotation='vertical')
 plt.legend(loc='upper left')

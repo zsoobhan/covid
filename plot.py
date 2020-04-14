@@ -8,7 +8,7 @@ y = np.array([
     6, 8, 21, 35, 55, 71, 103, 144, 177, 233,
     281, 335, 422, 463, 578, 759, 1019, 1228, 1408, 1789,
     2352, 2921, 3605, 4313, 4934, 5373, 6159, 7097, 7978, 8958,
-    9875, 10612, 11329
+    9875, 10612, 11329, 12107
 ])
 
 x = np.array([
@@ -16,7 +16,7 @@ x = np.array([
     1, 3, 5, 6, 7, 8, 9, 10, 11, 12,
     13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
     23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-    33, 34, 35
+    33, 34, 35, 36
 ])
 
 labels = [
@@ -26,7 +26,7 @@ labels = [
     '24 Mar.', '25 Mar.', '26 Mar.', '27 Mar.', '28 Mar.', '29 Mar.',
     '30 Mar.', '31 Mar.', '01 Apr.', '02 Apr.', '03 Apr.', '04 Apr.',
     '05 Apr.', '06 Apr.', '07 Apr.', '08 Apr.', '09 Apr.', '10 Apr.',
-    '11 Apr', '12 Apr', '13 Apr.'
+    '11 Apr', '12 Apr', '13 Apr.', '14 Apr.',
 ]
 
 x_diffs = x[1:]
@@ -97,4 +97,5 @@ for a, b in zip(x_diffs, diffs):
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x, labels, rotation='vertical')
 plt.legend(loc='upper left')
+plt.savefig('latest', dpi=200)
 plt.show()

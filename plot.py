@@ -1,7 +1,7 @@
+#!/usr/bin/env python3
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
-
 
 y = np.array([
     # Deaths
@@ -34,8 +34,6 @@ diffs = []
 for idx, val in enumerate(y):
     if idx+1 < len(y):
         diffs += [y[idx+1]-val]
-
-diffs = np.array(diffs)
 
 # ensure we have the correct number of points
 assert(len(y) == len(x) == len(labels) == len(diffs)+1)

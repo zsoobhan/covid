@@ -89,10 +89,10 @@ plt.plot(
 
 # Annotate each point with its value
 for a, b in zip(x, y):
-    plt.text(a, b, str(b), fontsize=10, color='black')
+    plt.text(a, b, str(b), fontsize=7, color='black')
 
 for a, b in zip(x_diffs, diffs):
-    plt.text(a, b, str(b), fontsize=9, color='black')
+    plt.text(a, b, str(b), fontsize=5, color='black')
 
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x, labels, rotation='vertical')

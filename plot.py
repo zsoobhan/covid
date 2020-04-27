@@ -50,7 +50,8 @@ def exponential_func(x, a, b):
 popt, pcov = curve_fit(
     exponential_func, x, y,
     method='trf',
-    bounds=(0, [y[-1], y[0]])
+    bounds=([0, -1], [np.inf, 1])  # expect a to be between 0 and inf
+                                   # and b between -1 and 1
 )
 popt_diffs, pcov_diffs = curve_fit(exponential_func, x_diffs, diffs)
 

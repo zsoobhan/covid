@@ -9,7 +9,8 @@ y = np.array([
     281, 335, 422, 463, 578, 759, 1019, 1228, 1408, 1789,
     2352, 2921, 3605, 4313, 4934, 5373, 6159, 7097, 7978, 8958,
     9875, 10612, 11329, 12107, 12868, 13729, 14576, 15464, 16060,
-    16509, 17337, 18100, 18738, 19506, 20319, 20732
+    16509, 17337, 18100, 18738, 19506, 20319, 20732, 21092, 21678,
+    26097
 ])
 
 x = np.array([
@@ -18,7 +19,7 @@ x = np.array([
     13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
     23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
     33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
-    43, 44, 45, 46, 47, 48
+    43, 44, 45, 46, 47, 48, 49, 50, 51,
 ])
 
 labels = [
@@ -30,7 +31,8 @@ labels = [
     '05 Apr', '06 Apr', '07 Apr', '08 Apr', '09 Apr', '10 Apr',
     '11 Apr', '12 Apr', '13 Apr', '14 Apr', '15 Apr', '16 Apr',
     '17 Apr', '18 Apr', '19 Apr', '20 Apr', '21 Apr', '22 Apr',
-    '23 Apr', '24 Apr', '25 Apr', '26 Apr'
+    '23 Apr', '24 Apr', '25 Apr', '26 Apr', '27 Apr', '28 Apr',
+    '29 Apr'
 ]
 
 x_diffs = x[1:]
@@ -68,7 +70,7 @@ r_squared = 1.0 - (ss_res / ss_tot)
 
 
 # Plot
-plt.title(f'Covid-19 UK Hospitalised Fatalities', fontsize=16)
+plt.title(f'Covid-19 UK Fatalities', fontsize=16)
 plt.plot(
     x, y,
     linestyle='-', label="Reported Deaths", marker='s',
@@ -102,6 +104,13 @@ for a, b in zip(x, y):
 
 for a, b in zip(x_diffs, diffs):
     plt.text(a, b, str(b), fontsize=6, color='black')
+
+ax = plt.gca()
+ax.axvline(x=50, alpha=0.7, color='blue', linestyle='--', linewidth=1)
+plt.text(
+    50, 10000, '$\\rightarrow$ \n *includes \n non-hospital \n deaths',
+    alpha=0.7, color='blue', fontsize=5
+)
 
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x, labels, rotation='vertical', fontsize='8')

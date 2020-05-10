@@ -10,7 +10,8 @@ y = np.array([
     2352, 2921, 3605, 4313, 4934, 5373, 6159, 7097, 7978, 8958,
     9875, 10612, 11329, 12107, 12868, 13729, 14576, 15464, 16060,
     16509, 17337, 18100, 18738, 19506, 20319, 20732, 21092, 21678,
-    26097, 26771, 27510, 28131, 28446, 28734
+    26097, 26771, 27510, 28131, 28446, 28734, 29427, 30076, 30615,
+    31241, 31587, 31855
 ])
 
 x = np.array([
@@ -20,7 +21,7 @@ x = np.array([
     23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
     33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
     43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
-    53, 54, 55, 56
+    53, 54, 55, 56, 57, 58, 59, 60, 61, 62
 
 ])
 
@@ -34,7 +35,8 @@ labels = [
     '11 Apr', '12 Apr', '13 Apr', '14 Apr', '15 Apr', '16 Apr',
     '17 Apr', '18 Apr', '19 Apr', '20 Apr', '21 Apr', '22 Apr',
     '23 Apr', '24 Apr', '25 Apr', '26 Apr', '27 Apr', '28 Apr',
-    '29 Apr', '30 Apr', '01 May', '02 May', '03 May', '04 May'
+    '29 Apr', '30 Apr', '01 May', '02 May', '03 May', '04 May',
+    '05 May', '06 May', '07 May', '08 May', '09 May', '10 May'
 ]
 
 x_diffs = x[1:]
@@ -115,7 +117,7 @@ plt.text(
 )
 
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
-plt.xticks(x, labels, rotation='vertical', fontsize='8')
+plt.xticks(x[::2], labels[::2], rotation='vertical', fontsize='8')
 plt.legend(loc='upper left')
 plt.savefig('latest', dpi=200)
 plt.show()

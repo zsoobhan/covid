@@ -11,7 +11,7 @@ y = np.array([
     9875, 10612, 11329, 12107, 12868, 13729, 14576, 15464, 16060,
     16509, 17337, 18100, 18738, 19506, 20319, 20732, 21092, 21678,
     26097, 26771, 27510, 28131, 28446, 28734, 29427, 30076, 30615,
-    31241, 31587, 31855, 32065
+    31241, 31587, 31855, 32065, 32692, 33186
 ])
 
 x = np.array([
@@ -22,7 +22,7 @@ x = np.array([
     33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
     43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
     53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-    63
+    63, 64, 65
 
 
 ])
@@ -39,7 +39,7 @@ labels = [
     '23 Apr', '24 Apr', '25 Apr', '26 Apr', '27 Apr', '28 Apr',
     '29 Apr', '30 Apr', '01 May', '02 May', '03 May', '04 May',
     '05 May', '06 May', '07 May', '08 May', '09 May', '10 May',
-    '11 May'
+    '11 May', '12 May', '13 May'
 ]
 
 x_diffs = x[1:]
@@ -113,11 +113,20 @@ for a, b in zip(x_diffs, diffs):
     plt.text(a, b, str(b), fontsize=6, color='black')
 
 ax = plt.gca()
+
+# annotations
 ax.axvline(x=50, alpha=0.7, color='blue', linestyle='--', linewidth=1)
 plt.text(
     50, 10000, '$\\rightarrow$ \n *includes \n non-hospital \n deaths',
     alpha=0.7, color='blue', fontsize=5
 )
+
+ax.axvline(x=63, alpha=0.7, color='blue', linestyle='--', linewidth=1)
+plt.text(
+    63, 10000, '$\\rightarrow$\n *stay home\n\t$\\downarrow$\n stay alert',
+    alpha=0.7, color='blue', fontsize=5,
+)
+
 
 plt.grid(axis='y', which='major', color='#eeeeee', linestyle='-')
 plt.xticks(x[::2], labels[::2], rotation='vertical', fontsize='8')

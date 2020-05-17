@@ -11,7 +11,7 @@ y = np.array([
     9875, 10612, 11329, 12107, 12868, 13729, 14576, 15464, 16060,
     16509, 17337, 18100, 18738, 19506, 20319, 20732, 21092, 21678,
     26097, 26771, 27510, 28131, 28446, 28734, 29427, 30076, 30615,
-    31241, 31587, 31855, 32065, 32692, 33186
+    31241, 31587, 31855, 32065, 32692, 33186, 33614, 33998, 34466
 ])
 
 x = np.array([
@@ -22,7 +22,7 @@ x = np.array([
     33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
     43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
     53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-    63, 64, 65
+    63, 64, 65, 66, 67, 68
 
 
 ])
@@ -39,7 +39,8 @@ labels = [
     '23 Apr', '24 Apr', '25 Apr', '26 Apr', '27 Apr', '28 Apr',
     '29 Apr', '30 Apr', '01 May', '02 May', '03 May', '04 May',
     '05 May', '06 May', '07 May', '08 May', '09 May', '10 May',
-    '11 May', '12 May', '13 May'
+    '11 May', '12 May', '13 May', '14 May', '15 May', '16 May'
+
 ]
 
 x_diffs = x[1:]
@@ -52,30 +53,6 @@ for idx, val in enumerate(y):
 assert(len(y) == len(x) == len(labels) == len(diffs)+1)
 
 
-def exponential_func(x, a, b):
-    return a * np.exp(b * x)
-
-
-popt, pcov = curve_fit(
-    exponential_func, x, y,
-    method='trf',
-    bounds=([0, -1], [np.inf, 1])  # expect a to be between 0 and inf
-                                   # and b between -1 and 1
-)
-popt_diffs, pcov_diffs = curve_fit(exponential_func, x_diffs, diffs)
-
-
-# work out R^2
-def fit_function(x):
-    return popt[0] * np.exp(popt[1] * x)
-
-
-residuals = y - fit_function(x)
-ss_res = np.sum(residuals**2)
-ss_tot = np.sum((y - np.mean(y))**2)
-r_squared = 1.0 - (ss_res / ss_tot)
-
-
 # Plot
 plt.title(f'Covid-19 UK Fatalities', fontsize=16)
 plt.plot(
@@ -84,21 +61,6 @@ plt.plot(
     markersize='2', color="red", dash_joinstyle='bevel'
 )
 
-plt.plot(
-    x, exponential_func(x, *popt),
-    label=r'$y={a}e^{b}$'.format(
-        a=round(popt[0], 2),
-        b='{' + str(round(popt[1], 2)) + 'x}',
-    ),
-    linestyle='dashed',
-    color='grey',
-    linewidth=1
-
-)
-plt.plot(
-    [], [], ' ',
-    label="$R^2={r_squared}$".format(r_squared=round(r_squared, 4))
-)
 plt.plot(
     x_diffs, diffs, markersize='2',
     linestyle='-', marker='s',
